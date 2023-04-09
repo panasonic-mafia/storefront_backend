@@ -5,20 +5,27 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index 
-- Show
-- Create [token required]
-- [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category)
+- Index - get all products - `/products` [GET]
+- Show - get one product by it's id - `/products/:id` [GET]
+- Create - create product in products table - `/products` [POST] [token required]
+- Update - update product in products table - `/products/:id` [PATCH] [token required]
+- Delete - delete product from products table - `/products/:id` [DELETE] [token required]
+- [OPTIONAL] Top 5 most popular products - `/products/top` [GET]
+- [OPTIONAL] Products by category (args: product category) - `/products/category/:category` [GET]
 
 #### Users
-- Index [token required]
-- Show [token required]
-- Create N[token required]
+- Index - get all users - `/users` [GET] [token required]
+- Show - get one user by it's id - `/users/:id` [GET] [token required]
+- Create - create new user - `/users` [POST]
+- Authenticate - authenticate via username and password - `/users/authenticate`
+- Delete - delete user - `/users/:id` [DELETE] [token required]
 
 #### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+- Create - create new order - `/orders` [POST] [token required]
+- Update - update order - `/orders/:id` [PUT] [token required]
+- Delete - delete order - `/orders/:id` [DELETE] [token required]
+- Current Order by user (args: user id) - `/users/:id/orders/current` [GET] [token required]
+- [OPTIONAL] Completed Orders by user (args: user id) - `/users/:id/orders/completed` [GET] [token required]
 
 ## Data Shapes
 #### Product
@@ -29,9 +36,10 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### User
 - id
+- username
 - firstName
 - lastName
-- password
+- password 
 
 #### Orders
 - id
@@ -39,4 +47,31 @@ These are the notes from a meeting with the frontend developer that describe wha
 - quantity of each product in the order
 - user_id
 - status of order (active or complete)
+
+## Data Tables
+#### Products
+- id SERIAL PRIMARY KEY
+- name VARCHAR(255)
+- price INTEGER
+
+#### Users
+- id  SERIAL PRIMARY KEY
+- username VARCHAR(100)
+- firstName VARCHAR(255)
+- lastName VARCHAR(255)
+- password_digest VARCHAR(255)
+
+#### Orders
+- id SERIAL PRIMARY KEY
+- user_id BIGINT REFERENCES users(id)
+- status VARCHAR(50)
+
+#### Order_porducts
+- id SERIAL PRIMARY KEY
+- orderId BIGINT REFERENCES orders(id)
+- productId BIGINT REFERENCES products(id)
+- quantity INTEGER
+
+
+
 
