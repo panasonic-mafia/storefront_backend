@@ -10,7 +10,7 @@ See description of functionality, API Endpoints, Data Shapes and Tables in the [
 - Clone the repository
 - Install the dependencies using `yarn install`
 - Install docker and docker-compose
-- Create new `.env` file using `.env_template` as a template. Make sure to set different names for POSTGRES_DB and POSTGRES_DB_TEST.
+- Create new `.env` file using `.env_template` as a template. Make sure to set different name for POSTGRES_DB. Keep POSTGRES_DB_TEST value as `mytestdb`.
 - Run `docker-compose up` to start the database
 
 ## Running the project
